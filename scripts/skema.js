@@ -63,17 +63,21 @@ function addRow() {
 
 let result = "";
 function removeRow() {
-    modulIndex--;
     const moduler = skemaEditModuler.getElementsByTagName("tr");
-    result = localStorage.getItem("klasseAktivitet_" + urlParams.get("klasse"));
-    if(localStorage.getItem("klasseAktivitet_" + urlParams.get("klasse"))) {
-        localStorage.getItem("klasseAktivitet_" + urlParams.get("klasse")).split(",").forEach(coordinate => {
-            if(coordinate.substring(0,1) == moduler.length - 1) {
-                result = result.replace(coordinate + ",", "");
-            }
-        });
+    if(moduler.length > 1) {
+        modulIndex--;
+        if(result == "") {
+            result = localStorage.getItem("klasseAktivitet_" + urlParams.get("klasse"));
+        }
+        if(localStorage.getItem("klasseAktivitet_" + urlParams.get("klasse"))) {
+            localStorage.getItem("klasseAktivitet_" + urlParams.get("klasse")).split(",").forEach(coordinate => {
+                if(coordinate.substring(0,1) == moduler.length - 1) {
+                    result = result.replace(coordinate + ",", "");
+                }
+            });
+        }
+        moduler[moduler.length - 1].remove();
     }
-    moduler[moduler.length - 1].remove();
 }
 
 document.getElementById("skemaEditSaveButton").addEventListener("click", () => {

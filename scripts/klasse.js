@@ -37,16 +37,11 @@ function sletKlasse(name) {
             klasse.remove();
         }
     }
-    if(localStorage.getItem("klasse_" + name)) {
-        localStorage.removeItem("klasse_" + name);
-    }
-    if(localStorage.getItem("klasseAktivitet_" + name)) {
-        localStorage.removeItem("klasseAktivitet_" + name);
-    }
+    localStorage.removeItem("klasse_" + name);
+    localStorage.removeItem("klasseAktivitet_" + name);
 }
 
 document.getElementById("openModalButton").addEventListener("click", () => {
-    console.log("Focus");
     setTimeout(() => {
         nameInput.focus();
     }, 500);
