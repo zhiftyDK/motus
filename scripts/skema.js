@@ -28,6 +28,7 @@ if(!urlParams.get("klasse")) {
         if(klasseNavn == option.innerText) {
             option.selected = true;
             loadSkema(option.innerText);
+            loadActivity();
         }
     }
 }
@@ -60,13 +61,25 @@ function addRow() {
     skemaEditModuler.append(modul);
 }
 
+let result = "";
 function removeRow() {
     modulIndex--;
     const moduler = skemaEditModuler.getElementsByTagName("tr");
+    result = localStorage.getItem("klasseAktivitet_" + urlParams.get("klasse"));
+    if(localStorage.getItem("klasseAktivitet_" + urlParams.get("klasse"))) {
+        localStorage.getItem("klasseAktivitet_" + urlParams.get("klasse")).split(",").forEach(coordinate => {
+            if(coordinate.substring(0,1) == moduler.length - 1) {
+                result = result.replace(coordinate + ",", "");
+            }
+        });
+    }
     moduler[moduler.length - 1].remove();
 }
 
 document.getElementById("skemaEditSaveButton").addEventListener("click", () => {
+    if(localStorage.getItem("klasseAktivitet_" + urlParams.get("klasse"))) {
+        localStorage.setItem("klasseAktivitet_" + urlParams.get("klasse"), result);
+    }
     let skemaContent = "";
     const moduler = skemaEditModuler.getElementsByTagName("tr");
     for (let i = 1; i < moduler.length + 1; i++) {
@@ -102,7 +115,7 @@ document.getElementById("editSkemaButton").addEventListener("click", () => {
                 }
             }
             moduler.forEach((modul, index) => {
-                const modulContentArray = modul.replaceAll("-", "||").replaceAll("<th scope=\"row\">", "||").replaceAll("</th>", "||").replaceAll("<td>", "||").replaceAll("</td>", "||").split("||").filter(n => {return n != ''});
+                const modulContentArray = modul.replaceAll("<td style=\"background-color: lightgreen;\">", "||").replaceAll("<td style=\"\">", "||").replaceAll("-", "||").replaceAll("<th scope=\"row\">", "||").replaceAll("</th>", "||").replaceAll("<td>", "||").replaceAll("</td>", "||").split("||").filter(n => {return n != ''});
                 const modulIndex = index + 1;
                 document.getElementById(`${modulIndex}modultidfra`).value = modulContentArray[0];
                 document.getElementById(`${modulIndex}modultidtil`).value = modulContentArray[1];
@@ -115,3 +128,49 @@ document.getElementById("editSkemaButton").addEventListener("click", () => {
         }
     }, 500);
 });
+
+const moduler = document.getElementById("skemaModuler").getElementsByTagName("td");
+for (let i = 0; i < moduler.length; i++) {
+    const modul = moduler[i];
+    modul.addEventListener("click", event => {
+        event.target.style.backgroundColor == "lightgreen" ? event.target.style.backgroundColor = "" : event.target.style.backgroundColor = "lightgreen";
+        let selected = "";
+        const alleModuler = document.getElementById("skemaModuler").getElementsByTagName("tr");
+        for (let i = 0; i < alleModuler.length; i++) {
+            const modul = alleModuler[i].getElementsByTagName("td");
+            for (let j = 0; j < modul.length; j++) {
+                if(modul[j].outerHTML.includes("lightgreen")) {
+                    selected += `${i}${j},`;
+                }
+            }
+        }
+        localStorage.setItem("klasseAktivitet_" + urlParams.get("klasse"), selected);
+        loadActivity();
+    });
+}
+
+function loadActivity() {
+    if(localStorage.getItem("klasseAktivitet_" + urlParams.get("klasse"))) {
+        const modulCoordinates = localStorage.getItem("klasseAktivitet_" + urlParams.get("klasse")).split(",").filter(n => {return n != ''});
+        modulCoordinates.forEach(coordinate => {
+            const alleModuler = document.getElementById("skemaModuler").getElementsByTagName("tr");
+            for (let i = 0; i < alleModuler.length; i++) {
+                const modul = alleModuler[i].getElementsByTagName("td");
+                for (let j = 0; j < modul.length; j++) {
+                    if(`${i}${j}` == coordinate) {
+                        modul[j].style.backgroundColor = "lightgreen";
+                    }
+                }
+            }
+        });
+        const maxActivity = document.getElementById("skemaModuler").getElementsByTagName("tr").length * 5;
+        const currentActivity = localStorage.getItem("klasseAktivitet_" + urlParams.get("klasse")).split(",").filter(n => {return n != ''}).length;
+        const activityPercentage = Math.floor(currentActivity / maxActivity * 100) + "%";
+        document.getElementById("aktivitetsCounter").innerText = "Denne uges aktivitetsniveau ligger på: " + activityPercentage;
+    } else {
+        const skema = localStorage.getItem("klasse_" + urlParams.get("klasse"));
+        if(skema) {
+            document.getElementById("aktivitetsCounter").innerText = "Denne uges aktivitetsniveau ligger på: 0%";
+        }
+    }
+}

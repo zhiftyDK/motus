@@ -10,6 +10,12 @@
     <title>Motus</title>
     <link rel="stylesheet" href="./style.css">
     <script src="./scripts/skema.js" defer></script>
+    <style>
+        #skemaModuler td:hover {
+            background-color: rgb(198, 198, 198);
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-light bg-light shadow">
@@ -118,6 +124,7 @@
             </div>
           </div>
         <div class="row justify-content-center align-items-center g-2 mt-4">
+            <h5 class="col-9 text-start" id="aktivitetsCounter"></h5>
             <div class="col-9" style="display: none;" id="skemaDiv">
                 <table class="table table-bordered">
                     <thead>
