@@ -37,7 +37,7 @@
                 <h2>Vælg en klasse:</h2>
                 <div class="input-group">
                     <select class="form-select" id="klasseSelect"></select>
-                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#skemaEditModal">Tilføj/Rediger Skema <i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#skemaEditModal" id="editSkemaButton">Tilføj/Rediger Skema <i class="fa-solid fa-pen-to-square"></i></button>
                 </div>
             </div>
         </div>
@@ -46,10 +46,10 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="skemaEditModalLabel">Rediger Skema</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="location.reload()"></button>
                     </div>
                     <div class="modal-body d-flex justify-content-center">
-                        <div class="col-12" style="display: none;" id="skemaDiv">
+                        <div class="col-12">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -79,7 +79,7 @@
                                         <td><input class="form-control" style="width: 10rem;" placeholder="2. modul" id="2modulfredag"></td>
                                     </tr>
                                     <tr>
-                                        <th scope="row" class="d-flex"><input class="form-control" style="width: 4rem;" placeholder="fra"><span style="width: 0.5rem;"></span>-<span style="width: 0.5rem;"></span><input class="form-control" style="width: 4rem;" placeholder="til"></th>
+                                        <th scope="row" class="d-flex"><input class="form-control" style="width: 4rem;" placeholder="fra" id="3modultidfra"><span style="width: 0.5rem;"></span>-<span style="width: 0.5rem;"></span><input class="form-control" style="width: 4rem;" placeholder="til" id="3modultidtil"></th>
                                         <td><input class="form-control" style="width: 10rem;" placeholder="3. modul" id="3modulmandag"></td>
                                         <td><input class="form-control" style="width: 10rem;" placeholder="3. modul" id="3modultirsdag"></td>
                                         <td><input class="form-control" style="width: 10rem;" placeholder="3. modul" id="3modulonsdag"></td>
@@ -87,20 +87,20 @@
                                         <td><input class="form-control" style="width: 10rem;" placeholder="3. modul" id="3modulfredag"></td>
                                     </tr>
                                     <tr>
-                                        <th scope="row" class="d-flex"><input class="form-control" style="width: 4rem;" placeholder="fra"><span style="width: 0.5rem;"></span>-<span style="width: 0.5rem;"></span><input class="form-control" style="width: 4rem;" placeholder="til"></th>
-                                        <td><input class="form-control" style="width: 10rem;" placeholder="4. modul"></td>
-                                        <td><input class="form-control" style="width: 10rem;" placeholder="4. modul"></td>
-                                        <td><input class="form-control" style="width: 10rem;" placeholder="4. modul"></td>
-                                        <td><input class="form-control" style="width: 10rem;" placeholder="4. modul"></td>
-                                        <td><input class="form-control" style="width: 10rem;" placeholder="4. modul"></td>
+                                        <th scope="row" class="d-flex"><input class="form-control" style="width: 4rem;" placeholder="fra" id="4modultidfra"><span style="width: 0.5rem;"></span>-<span style="width: 0.5rem;"></span><input class="form-control" style="width: 4rem;" placeholder="til" id="4modultidtil"></th>
+                                        <td><input class="form-control" style="width: 10rem;" placeholder="4. modul" id="4modulmandag"></td>
+                                        <td><input class="form-control" style="width: 10rem;" placeholder="4. modul" id="4modultirsdag"></td>
+                                        <td><input class="form-control" style="width: 10rem;" placeholder="4. modul" id="4modulonsdag"></td>
+                                        <td><input class="form-control" style="width: 10rem;" placeholder="4. modul" id="4modultorsdag"></td>
+                                        <td><input class="form-control" style="width: 10rem;" placeholder="4. modul" id="4modulfredag"></td>
                                     </tr>
                                     <tr>
-                                        <th scope="row" class="d-flex"><input class="form-control" style="width: 4rem;" placeholder="fra"><span style="width: 0.5rem;"></span>-<span style="width: 0.5rem;"></span><input class="form-control" style="width: 4rem;" placeholder="til"></th>
-                                        <td><input class="form-control" style="width: 10rem;" placeholder="5. modul"></td>
-                                        <td><input class="form-control" style="width: 10rem;" placeholder="5. modul"></td>
-                                        <td><input class="form-control" style="width: 10rem;" placeholder="5. modul"></td>
-                                        <td><input class="form-control" style="width: 10rem;" placeholder="5. modul"></td>
-                                        <td><input class="form-control" style="width: 10rem;" placeholder="5. modul"></td>
+                                        <th scope="row" class="d-flex"><input class="form-control" style="width: 4rem;" placeholder="fra" id="5modultidfra"><span style="width: 0.5rem;"></span>-<span style="width: 0.5rem;"></span><input class="form-control" style="width: 4rem;" placeholder="til" id="5modultidtil"></th>
+                                        <td><input class="form-control" style="width: 10rem;" placeholder="5. modul" id="5modulmandag"></td>
+                                        <td><input class="form-control" style="width: 10rem;" placeholder="5. modul" id="5modultirsdag"></td>
+                                        <td><input class="form-control" style="width: 10rem;" placeholder="5. modul" id="5modulonsdag"></td>
+                                        <td><input class="form-control" style="width: 10rem;" placeholder="5. modul" id="5modultorsdag"></td>
+                                        <td><input class="form-control" style="width: 10rem;" placeholder="5. modul" id="5modulfredag"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -111,13 +111,28 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Luk <i class="fa-solid fa-ban"></i></button>
-                        <button type="button" class="btn btn-dark">Gem ændringer <i class="fa-regular fa-floppy-disk"></i></button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="location.reload()">Luk <i class="fa-solid fa-ban"></i></button>
+                        <button type="button" class="btn btn-dark" id="skemaEditSaveButton">Gem ændringer <i class="fa-regular fa-floppy-disk"></i></button>
                     </div>
                 </div>
             </div>
           </div>
         <div class="row justify-content-center align-items-center g-2 mt-4">
+            <div class="col-9" style="display: none;" id="skemaDiv">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tid</th>
+                            <th scope="col">Mandag</th>
+                            <th scope="col">Tirsdag</th>
+                            <th scope="col">Onsdag</th>
+                            <th scope="col">Torsdag</th>
+                            <th scope="col">Fredag</th>
+                        </tr>
+                    </thead>
+                    <tbody id="skemaModuler"></tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>

@@ -17,7 +17,6 @@ if(!urlParams.get("klasse")) {
     if(klasseSelectOption.length >= 1) {
         window.open("./skema.html?klasse=" + klasseSelectOption[0].value, "_self");
     } else {
-        document.body.innerHTML = "";
         alert("Du skal først oprætte en klasse, for at se skeamet!");
         window.open("./klasse.html", "_self");
     }
@@ -34,8 +33,11 @@ if(!urlParams.get("klasse")) {
 }
 
 function loadSkema(klasseNavn) {
-    document.getElementById("skemaDiv").style.display = "block";
     const skema = localStorage.getItem("klasse_" + klasseNavn);
+    if(skema) {
+        document.getElementById("skemaDiv").style.display = "block";
+        document.getElementById("skemaModuler").innerHTML = skema;
+    }
 }
 
 klasseSelect.addEventListener("change", () => {
@@ -60,6 +62,56 @@ function addRow() {
 
 function removeRow() {
     modulIndex--;
-    const moduler = skemaEditModuler.getElementsByTagName("tr")
+    const moduler = skemaEditModuler.getElementsByTagName("tr");
     moduler[moduler.length - 1].remove();
 }
+
+document.getElementById("skemaEditSaveButton").addEventListener("click", () => {
+    let skemaContent = "";
+    const moduler = skemaEditModuler.getElementsByTagName("tr");
+    for (let i = 1; i < moduler.length + 1; i++) {
+        const modulTidFra = document.getElementById(`${i}modultidfra`);
+        const modulTidTil = document.getElementById(`${i}modultidtil`);
+        const modulMandag = document.getElementById(`${i}modulmandag`);
+        const modulTirsdag = document.getElementById(`${i}modultirsdag`);
+        const modulOnsdag = document.getElementById(`${i}modulonsdag`);
+        const modulTorsdag = document.getElementById(`${i}modultorsdag`);
+        const modulFredag = document.getElementById(`${i}modulfredag`);
+        skemaContent += `<tr><th scope="row">${modulTidFra.value}-${modulTidTil.value}</th><td>${modulMandag.value}</td><td>${modulTirsdag.value}</td><td>${modulOnsdag.value}</td><td>${modulTorsdag.value}</td><td>${modulFredag.value}</td></tr>`;
+        if(i == moduler.length) {
+            localStorage.setItem("klasse_" + urlParams.get("klasse"), skemaContent);
+            location.reload();
+        }
+    }
+});
+
+document.getElementById("editSkemaButton").addEventListener("click", () => {
+    setTimeout(() => {
+        const skema = localStorage.getItem("klasse_" + urlParams.get("klasse"));
+        if(skema) {
+            const moduler = skema.replaceAll("<tr>", "||").replaceAll("</tr>", "||").split("||").filter(n => {return n != ''});
+            if(moduler.length > 5) {
+                const diff = moduler.length - 5;
+                for (let i = 0; i < diff; i++) {
+                    addRow();
+                }
+            } else if(moduler.length < 5) {
+                const diff = 5 - moduler.length;
+                for (let i = 0; i < diff; i++) {
+                    removeRow();
+                }
+            }
+            moduler.forEach((modul, index) => {
+                const modulContentArray = modul.replaceAll("-", "||").replaceAll("<th scope=\"row\">", "||").replaceAll("</th>", "||").replaceAll("<td>", "||").replaceAll("</td>", "||").split("||").filter(n => {return n != ''});
+                const modulIndex = index + 1;
+                document.getElementById(`${modulIndex}modultidfra`).value = modulContentArray[0];
+                document.getElementById(`${modulIndex}modultidtil`).value = modulContentArray[1];
+                document.getElementById(`${modulIndex}modulmandag`).value = modulContentArray[2];
+                document.getElementById(`${modulIndex}modultirsdag`).value = modulContentArray[3];
+                document.getElementById(`${modulIndex}modulonsdag`).value = modulContentArray[4];
+                document.getElementById(`${modulIndex}modultorsdag`).value = modulContentArray[5];
+                document.getElementById(`${modulIndex}modulfredag`).value = modulContentArray[6];
+            });
+        }
+    }, 500);
+});

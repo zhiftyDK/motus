@@ -37,4 +37,14 @@ function sletKlasse(name) {
             klasse.remove();
         }
     }
+    if(localStorage.getItem("klasse_" + name)) {
+        localStorage.removeItem("klasse_" + name);
+    }
 }
+
+document.getElementById("openModalButton").addEventListener("click", () => {
+    console.log("Focus");
+    setTimeout(() => {
+        nameInput.focus();
+    }, 500);
+});
