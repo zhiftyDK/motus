@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input id="imageName" placeholder="Image file name">
+    <input id="activityName" placeholder="Activity name">
+    <input id="activityDescription" placeholder="Activity Description">
+    <input id="activityFag" placeholder="Fag e.g. 'Engelsk, Dansk, Fysik'">
+    <button id="generateButton">Generate Code</button>
+    </br>
+    <textarea id="outputTextArea" cols="150" rows="30"></textarea>
+
+    <script>
+        document.getElementById("generateButton").addEventListener("click", () => {
+            const content = `
+<div class="col d-flex justify-content-center mt-5">
+    <div class="card" style="width: 18rem;">
+    <img src="./images/${document.getElementById("imageName").value}" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title">${document.getElementById("activityName").value}</h5>
+            <p class="card-text">${document.getElementById("activityDescription").value}</p>
+            <p><strong>Fag:</strong> ${document.getElementById("activityFag").value}</p>
+            <a href="#" class="btn btn-dark">Vis aktivitet <i class="fa-solid fa-eye"></i></a>
+        </div>
+    </div>
+</div>`;
+            document.getElementById("outputTextArea").value = content;
+        });
+    </script>
+</body>
+</html>
