@@ -19,15 +19,13 @@
     <script>
         document.getElementById("generateButton").addEventListener("click", () => {
             const content = `
-<div class="col d-flex justify-content-center mt-5">
-    <div class="card" style="width: 18rem;">
+<div class="card" style="width: 18rem;">
     <img src="./images/${document.getElementById("imageName").value}" class="card-img-top">
-        <div class="card-body">
-            <h5 class="card-title">${document.getElementById("activityName").value}</h5>
-            <p class="card-text">${document.getElementById("activityDescription").value}</p>
-            <p><strong>Fag:</strong> ${document.getElementById("activityFag").value}</p>
-            <a href="#" class="btn btn-dark">Vis aktivitet <i class="fa-solid fa-eye"></i></a>
-        </div>
+    <div class="card-body">
+        <h5 class="card-title">${document.getElementById("activityName").value}</h5>
+        <p class="card-text">${document.getElementById("activityDescription").value}</p>
+        <p><strong>Fag:</strong> ${document.getElementById("activityFag").value}</p>
+        <a href="#" class="btn btn-dark">Vis aktivitet <i class="fa-solid fa-eye"></i></a>
     </div>
 </div>`;
             document.getElementById("outputTextArea").value = content;

@@ -17,7 +17,8 @@ if(!urlParams.get("klasse")) {
     if(klasseSelectOption.length >= 1) {
         window.open("./skema.html?klasse=" + klasseSelectOption[0].value, "_self");
     } else {
-        document.body.innerHTML = `<h1>Du skal først oprette en klasse, for at se skemaet!</h1>`;
+        document.body.innerHTML = "";
+        alert("Du skal først oprætte en klasse, for at se skeamet!");
         window.open("./klasse.html", "_self");
     }
 } else {
