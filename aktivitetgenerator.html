@@ -23,10 +23,9 @@
     <img src="./images/${document.getElementById("imageName").value}" class="card-img-top">
     <div class="card-body">
         <h5 class="card-title">${document.getElementById("activityName").value}</h5>
-        <p class="card-text">${document.getElementById("activityDescription").value}</p>
-        <p><strong>Fag:</strong> ${document.getElementById("activityFag").value}</p>
+        <p class="card-text"><strong>Fag:</strong> ${document.getElementById("activityFag").value}</p>
     </div>
-    <a href="#" style="margin-left: 1rem; margin-right: 1rem;" class="btn btn-dark mb-3">Vis aktivitet <i class="fa-solid fa-eye"></i></a>
+    <a data-bs-toggle="modal" data-bs-target="#aktiviteterModal" onclick="openAktivitetModal('${document.getElementById("activityDescription").value}')" style="margin-left: 1rem; margin-right: 1rem;" class="btn btn-dark mb-3">Vis aktivitet <i class="fa-solid fa-eye"></i></a>
 </div>`;
             document.getElementById("outputTextArea").value = content;
         });

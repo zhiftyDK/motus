@@ -9,6 +9,7 @@
     <script src="https://kit.fontawesome.com/ba59337863.js" crossorigin="anonymous"></script>
     <title>Motus</title>
     <link rel="stylesheet" href="./style.css">
+    <script src="./scripts/aktiviteter.js" defer></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-light bg-light shadow">
@@ -30,17 +31,29 @@
             </div>
       </div>
     </nav>
-
+    <div class="modal fade" id="aktiviteterModal" tabindex="-1" aria-labelledby="aktiviteterModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="aktiviteterModalLabel">Aktivitet</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="aktiviteterModalBody"></div>  
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Luk <i class="fa-solid fa-ban"></i></button>
+            </div>
+        </div>
+        </div>
+    </div>
     <div class="container-fluid mt-5 mb-5">
         <div class="row mt-4 d-flex justify-content-center gap-5">
             <div class="card" style="width: 18rem; padding: 0;">
                 <img src="./images/kidsrunning.jpg" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title">Hastigheds beregning</h5>
-                    <p class="card-text">Eleverne sendes ud for at løbe 1 km, der bliver taget tid. Hvorefter eleverne kan beregne deres gennemsnits hastighed.</p>
-                    <p><strong>Fag:</strong> Matematik, Fysik-Kemi, Naturfagligt</p>
+                    <p class="card-text"><strong>Fag:</strong> Matematik, Fysik-Kemi, Naturfagligt</p>
                 </div>
-                <a href="#" style="margin-left: 1rem; margin-right: 1rem;" class="btn btn-dark mb-3">Vis aktivitet <i class="fa-solid fa-eye"></i></a>
+                <a data-bs-toggle="modal" data-bs-target="#aktiviteterModal" onclick="openAktivitetModal('Eleverne sendes ud for at løbe 1 km, der bliver taget tid. Hvorefter eleverne kan beregne deres gennemsnits hastighed.')" style="margin-left: 1rem; margin-right: 1rem;" class="btn btn-dark mb-3">Vis aktivitet <i class="fa-solid fa-eye"></i></a>
             </div>
         </div>
     </div>
