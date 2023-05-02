@@ -46,14 +46,71 @@
         </div>
     </div>
     <div class="container-fluid mt-5 mb-5">
-        <div class="row mt-4 d-flex justify-content-center gap-5">
+        <div class="row mt-4 d-flex justify-content-center text-center">
+            <div class="dropdown">
+                <button class="btn btn-dark dropdown-toggle w-25" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Vælg fag
+                </button>
+                <ul class="dropdown-menu w-25">
+                    <li>
+                        <div class="dropdown-item">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Dansk"/>
+                                <label class="form-check-label" for="Checkme1">Dansk</label>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown-item">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Engelsk"/>
+                                <label class="form-check-label" for="Checkme1">Engelsk</label>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown-item">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Matematik"/>
+                                <label class="form-check-label" for="Checkme1">Matematik</label>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown-item">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Fysik/Kemi"/>
+                                <label class="form-check-label" for="Checkme1">Fysik/Kemi</label>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown-item">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="Natur/Teknik"/>
+                                <label class="form-check-label" for="Checkme1">Natur/Teknik</label>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-5 d-flex justify-content-center gap-5">
             <div class="card" style="width: 18rem; padding: 0;">
                 <img src="./images/kidsrunning.jpg" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title">Hastigheds beregning</h5>
-                    <p class="card-text"><strong>Fag:</strong> Matematik, Fysik-Kemi, Naturfagligt</p>
+                    <p class="card-text"><strong>Fag:</strong> Matematik, Fysik/Kemi, Natur/Teknik</p>
                 </div>
                 <a data-bs-toggle="modal" data-bs-target="#aktiviteterModal" onclick="openAktivitetModal('Eleverne sendes ud for at løbe 1 km, der bliver taget tid. Hvorefter eleverne kan beregne deres gennemsnits hastighed.')" style="margin-left: 1rem; margin-right: 1rem;" class="btn btn-dark mb-3">Vis aktivitet <i class="fa-solid fa-eye"></i></a>
+            </div>
+            <div class="card" style="width: 18rem; padding: 0;">
+                <img src="./images/geometrinaturen.jpg" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Geometri i naturen</h5>
+                    <p class="card-text"><strong>Fag:</strong> Matematik, Natur/Teknik</p>
+                </div>
+                <a data-bs-toggle="modal" data-bs-target="#aktiviteterModal" onclick="openAktivitetModal('Eleverne skal finde objekter i naturen og beskrive deres geometri, samt regne på eksempelvist rumfang, omkreds overfladeareal osv.')" style="margin-left: 1rem; margin-right: 1rem;" class="btn btn-dark mb-3">Vis aktivitet <i class="fa-solid fa-eye"></i></a>
             </div>
         </div>
     </div>
